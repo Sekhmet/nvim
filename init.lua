@@ -20,17 +20,29 @@ require("mason-lspconfig").setup({
 })
 
 local lspconfig = require("lspconfig")
-lspconfig.volar.setup({
-	filetypes = { "vue" },
-	init_options = {
-		vue = {
-			hybridMode = false,
+
+lspconfig.eslint.setup({})
+lspconfig.volar.setup({})
+lspconfig.vtsls.setup({
+	enabled = true,
+	filetypes = { "typescript", "javascript", "vue" },
+	settings = {
+		vtsls = {
+			tsserver = {
+				globalPlugins = {
+					{
+						name = "@vue/typescript-plugin",
+						location = require("mason-registry").get_package("vue-language-server"):get_install_path()
+							.. "/node_modules/@vue/language-server",
+						languages = { "vue" },
+						configNamespace = "typescript",
+						enableForWorkspaceTypeScriptVersion = true,
+					},
+				},
+			},
 		},
 	},
 })
-
-lspconfig.vtsls.setup({})
-lspconfig.eslint.setup({})
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Telescope find files" })
