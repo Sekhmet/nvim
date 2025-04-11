@@ -21,16 +21,15 @@ require("mason-lspconfig").setup({
 
 local lspconfig = require("lspconfig")
 lspconfig.volar.setup({
-	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+	filetypes = { "vue" },
 	init_options = {
 		vue = {
 			hybridMode = false,
 		},
 	},
 })
-lspconfig.ts_ls.setup({
-	inlay_hints = { enable = true },
-})
+
+lspconfig.vtsls.setup({})
 lspconfig.eslint.setup({})
 
 local builtin = require("telescope.builtin")
