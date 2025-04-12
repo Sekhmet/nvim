@@ -18,26 +18,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		{ import = "config.plugins" },
-		{
-			"ellisonleao/gruvbox.nvim",
-			config = function()
-				require("gruvbox").setup({
-					terminal_colors = true,
-				})
-
-				vim.cmd.colorscheme("gruvbox")
-			end,
-		},
 		{ "f-person/git-blame.nvim" },
 		{ "github/copilot.vim" },
 		{ "folke/trouble.nvim", opts = {} },
-		{
-			"nvim-telescope/telescope.nvim",
-			tag = "0.1.8",
-			dependencies = { "nvim-lua/plenary.nvim" },
-		},
-		{ "williamboman/mason.nvim" },
-		{ "williamboman/mason-lspconfig.nvim" },
-		{ "neovim/nvim-lspconfig" },
 	},
 })
