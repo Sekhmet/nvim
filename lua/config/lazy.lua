@@ -20,6 +20,6 @@ require("lazy").setup({
 		{ import = "config.plugins" },
 		{ "f-person/git-blame.nvim" },
 		{ "github/copilot.vim" },
-		{ "folke/trouble.nvim", opts = {} },
+		{ "folke/trouble.nvim" },
 	},
 })
