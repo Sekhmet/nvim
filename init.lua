@@ -14,17 +14,14 @@ vim.opt.cursorline = true
 vim.diagnostic.config({ virtual_text = true })
 
 require("mason").setup()
-
 require("mason-lspconfig").setup({
-	ensure_installed = { "ts_ls", "volar", "eslint" },
+	ensure_installed = { "vtsls", "volar", "eslint", "stylua" },
 })
 
 local lspconfig = require("lspconfig")
 
 lspconfig.eslint.setup({})
-lspconfig.volar.setup({})
 lspconfig.vtsls.setup({
-	enabled = true,
 	filetypes = { "typescript", "javascript", "vue" },
 	settings = {
 		vtsls = {
