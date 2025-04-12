@@ -11,4 +11,6 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.cursorline = true
 
+vim.opt.scrolloff = 8
+
 vim.diagnostic.config({ virtual_text = true })
