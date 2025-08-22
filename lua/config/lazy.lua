@@ -21,5 +21,6 @@ require("lazy").setup({
 		{ "f-person/git-blame.nvim" },
 		{ "github/copilot.vim" },
 		{ "folke/trouble.nvim" },
+		{ "tpope/vim-sleuth" },
 	},
 })
