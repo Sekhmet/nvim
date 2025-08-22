@@ -2,18 +2,47 @@ return {
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
 			"neovim/nvim-lspconfig",
 		},
 		config = function()
 			require("mason").setup()
-			require("mason-lspconfig").setup({
-				ensure_installed = { "vtsls", "volar", "eslint", "stylua" },
+
+			vim.lsp.enable("eslint")
+			vim.lsp.enable("vtsls")
+			vim.lsp.enable("vue_ls")
+
+			local vue_language_server_path = vim.fn.expand("$MASON/packages")
+				.. "/vue-language-server"
+				.. "/node_modules/@vue/language-server"
+
+			local vue_plugin = {
+				name = "@vue/typescript-plugin",
+				location = vue_language_server_path,
+				languages = { "vue" },
+				configNamespace = "typescript",
+			}
+
+			vim.lsp.config("vtsls", {
+				filetypes = { "typescript", "javascript", "vue" },
+				settings = {
+					vtsls = {
+						tsserver = {
+							globalPlugins = { vue_plugin },
+						},
+					},
+				},
 			})
 
-			local lspconfig = require("lspconfig")
+			--[[
+			require("mason-lspconfig").setup({
+				ensure_installed = { "vtsls", "volar", "eslint" },
+			})
 
-			lspconfig.eslint.setup({})
+			lspconfig.eslint.setup({
+				settings = {
+					workingDirectories = { mode = "auto" },
+				},
+			})
 			lspconfig.vtsls.setup({
 				filetypes = { "typescript", "javascript", "vue" },
 				settings = {
@@ -34,6 +63,16 @@ return {
 					},
 				},
 			})
+			]]
+
+			vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
+			vim.keymap.set("n", "grr", require("telescope.builtin").lsp_references, { desc = "[G]oto [R]eferences" })
+			vim.keymap.set(
+				"n",
+				"gO",
+				require("telescope.builtin").lsp_document_symbols,
+				{ desc = "Open document symbols" }
+			)
 		end,
 	},
 }
