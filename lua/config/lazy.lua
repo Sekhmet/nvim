@@ -19,7 +19,18 @@ require("lazy").setup({
 	spec = {
 		{ import = "config.plugins" },
 		{ "github/copilot.vim" },
-		{ "folke/trouble.nvim" },
+		{
+			"folke/trouble.nvim",
+			opts = {},
+			cmd = "Trouble",
+			keys = {
+				{
+					"<leader>xx",
+					"<cmd>Trouble diagnostics toggle<cr>",
+					desc = "Diagnostics (Trouble)",
+				},
+			},
+		},
 		{ "tpope/vim-sleuth" },
 	},
 })
